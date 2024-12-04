@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/responsive/dimension.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/utilts/colors.dart';
@@ -43,8 +44,20 @@ class _CreateNoticeScreenState extends State<CreateNoticeScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TapEffect(
-                onClick: () {
-                  print(_noticeBodyController.text);
+                onClick: () async{
+                  // Add a new document to the 'users' collection
+                  FirebaseFirestore firestore = FirebaseFirestore.instance;
+                  try {
+                    await firestore.collection('users').add({
+                      'name': 'John Doe',
+                      'email': 'johndoe@example.com',
+                      'age': 25,
+                    });
+
+                    print("User added successfully");
+                  } catch (e) {
+                    print("Error adding user: $e");
+                  }
                 },
                 child: Text('done'.tr(),
                     style: AppTextStyles.normal.copyWith(

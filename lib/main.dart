@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/routes/route.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/utilts/colors.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/screen_ui/home.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
