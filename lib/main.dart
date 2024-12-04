@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:factory_method_pattern_with_clean_architecture/core/localization/abstract_localization_methods.dart';
+import 'package:factory_method_pattern_with_clean_architecture/core/routes/route.dart';
+import 'package:factory_method_pattern_with_clean_architecture/core/utilts/colors.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/screen_ui/home.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -8,75 +10,39 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],
-      path: 'assets/translations', // <-- change the path of the translation files
+      path:
+          'assets/translations', // <-- change the path of the translation files
       fallbackLocale: const Locale('en'),
-      child: MyApp(),
+      child: MyApp(
+        appRoute: AppRoute(),
+      ),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.appRoute});
+  final AppRoute appRoute;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        colorSchemeSeed: AppColors.warning2Color,
+        textSelectionTheme: TextSelectionThemeData(
+          selectionColor: AppColors.warning2Color
+              .withOpacity(0.3), // The selected text background color
+          selectionHandleColor: AppColors.warning2Color,
+        ),
+      ),
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'test'.tr(),
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          var language = context.locale.toString()=='ar'?'en':'ar';
-          LocalizationsImplementation.customSetLocale(language, context);
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      home: const MyHomePage(),
+      initialRoute: '/',
+      onGenerateRoute: appRoute.generateRoute,
     );
   }
 }

@@ -1,4 +1,7 @@
 {
-  "test": "test english"
+  "test": "test english",
+  "notes": "Notes",
+  "note": "Note،",
+  "done": "Done"
 
 }
