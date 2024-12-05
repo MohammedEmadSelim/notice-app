@@ -35,12 +35,12 @@ class _MyHomePageState extends State<MyHomePage> {
             return const CupertinoActivityIndicator();
           }
           if (state is GetNoticesSuccess) {
-            return CustomScrollView(
+            return Column(
 
-              slivers: [
-                DisplayNoticesByPeriod(notices: state.notices, title: 'Today'),
-                // Expanded(child: DisplayNoticesByPeriod(notices: state.notices, title: 'Today')),
-                // Expanded(child: DisplayNoticesByPeriod(notices: state.notices, title: 'Today')),
+              children: [
+                Flexible(child: DisplayNoticesByPeriod(notices: state.notices, title: 'Today')),
+                Expanded(child: DisplayNoticesByPeriod(notices: state.notices, title: 'Today')),
+                Expanded(child: DisplayNoticesByPeriod(notices: state.notices, title: 'Today')),
               ],
             );
           }

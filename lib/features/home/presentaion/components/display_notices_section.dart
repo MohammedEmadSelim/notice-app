@@ -18,17 +18,15 @@ class DisplayNoticesByPeriod extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 17.0,vertical: 5),
       child: Column(
         children: [
-          SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CustomText(
-                  text: title,
-                  fontSizes: 24.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CustomText(
+                text: title,
+                fontSizes: 24.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ],
           ),
           SizedBox(
             height: 10.h,
