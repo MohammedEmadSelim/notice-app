@@ -4,11 +4,22 @@ import 'package:factory_method_pattern_with_clean_architecture/core/routes/route
 import 'package:factory_method_pattern_with_clean_architecture/core/utilts/colors.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/widgets/custom_app_bar.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/widgets/custom_btn_widget.dart';
+import 'package:factory_method_pattern_with_clean_architecture/core/widgets/custom_text.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/home/domain/entities/notice.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/components/display_notices_section.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/controller/get_notices_cuibt/get_notices_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,14 +28,34 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: AppColors.backgroundColor,
         title: 'notes'.tr(),
       ),
-      body: const Column(
-        children: [
+      body: BlocConsumer<GetNoticesCubit, GetNoticesState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is GetNoticesLoading) {
+            return const CupertinoActivityIndicator();
+          }
+          if (state is GetNoticesSuccess) {
+            return CustomScrollView(
 
-        ],
+              slivers: [
+                DisplayNoticesByPeriod(notices: state.notices, title: 'Today'),
+                // Expanded(child: DisplayNoticesByPeriod(notices: state.notices, title: 'Today')),
+                // Expanded(child: DisplayNoticesByPeriod(notices: state.notices, title: 'Today')),
+              ],
+            );
+          }
+          if (state is GetNoticesFailure) {
+            return Center(child: CustomText(text: state.message));
+          }
+          return const Center(
+              child: CustomText(
+                  text:
+                      'un expexted issue .\n please contact with 01000927095 whats app'));
+        },
       ),
       bottomSheet: Container(
         alignment: Alignment.topLeft,
-        padding:  const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         decoration: const BoxDecoration(
           color: AppColors.backgroundColor,
           border: Border(
@@ -35,15 +66,22 @@ class MyHomePage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            CustomButtonWidget(
-              bgColor: AppColors.backgroundColor,
-              actionBtn: () {
-               Navigator.pushNamed(context, RoutePath.createNotice,);
-              },
-              child:  Icon(
-                Icons.add_card,
-                color: AppColors.warning2Color,
-                size: 40.h,
+            Semantics(
+              label: 'create note',
+              hint: 'press to create note',
+              child: CustomButtonWidget(
+                bgColor: AppColors.backgroundColor,
+                actionBtn: () {
+                  Navigator.pushNamed(
+                    context,
+                    RoutePath.createNotice,
+                  );
+                },
+                child: Icon(
+                  Icons.add_card,
+                  color: AppColors.warning2Color,
+                  size: 40.h,
+                ),
               ),
             )
           ],
@@ -52,3 +90,5 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
+

@@ -21,6 +21,9 @@ dependencies:
   easy_localization: ^3.0.7
   firebase_core: ^3.8.0
   cloud_firestore: ^5.5.0
+  either_dart: ^1.0.0
+  get_it: ^8.0.2
+  flutter_bloc: ^8.1.6
 
 dev_dependencies:
   flutter_test:
@@ -38,12 +41,16 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+  uses-material-design: true
+
   assets:
    - assets/translations/
 
 
-
-  uses-material-design: true
+  fonts:
+    - family: SFArabicRounded
+      fonts:
+        - asset: assets/font/SFArabic-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
