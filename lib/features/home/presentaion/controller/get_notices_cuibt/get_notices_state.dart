@@ -17,4 +17,6 @@ final class GetNoticesFailure extends GetNoticesState {
   final String message;
 
   GetNoticesFailure(this.message);
+
+
 }

@@ -6,7 +6,7 @@ import 'package:factory_method_pattern_with_clean_architecture/features/create_n
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/create_notice_entity.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/notice.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/data/models/notice_model.dart';
-import 'package:factory_method_pattern_with_clean_architecture/features/home/domain/entities/notice.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/home/domain/entities/notice_entity.dart';
 
 abstract class HomeNoticeDataSource {
   Future<List<NoticeModel>> getNotice();

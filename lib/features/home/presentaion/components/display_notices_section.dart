@@ -5,7 +5,7 @@ import 'package:factory_method_pattern_with_clean_architecture/core/utilts/color
 import 'package:factory_method_pattern_with_clean_architecture/core/widgets/custom_text.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/widgets/tap_effect.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/edit_notice/domain/entities/update_notice.dart';
-import 'package:factory_method_pattern_with_clean_architecture/features/home/domain/entities/notice.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/home/domain/entities/notice_entity.dart';
 import 'package:flutter/material.dart';
 
 class DisplayNoticesByPeriod extends StatelessWidget {
