@@ -5,5 +5,5 @@ import 'package:factory_method_pattern_with_clean_architecture/features/home/dom
 
 class GetNoticeMapper {
   static NoticeEntity mapToNoticeEntity(NoticeModel notice) =>
-      NoticeEntity(notice.title, notice.description, notice.createdAt);
+      NoticeEntity(notice.id,notice.title, notice.description, notice.createdAt);
 }

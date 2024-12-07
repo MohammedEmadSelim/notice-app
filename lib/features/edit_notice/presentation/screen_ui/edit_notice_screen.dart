@@ -9,23 +9,33 @@ import 'package:factory_method_pattern_with_clean_architecture/core/widgets/cust
 import 'package:factory_method_pattern_with_clean_architecture/core/widgets/tap_effect.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/notice.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/presentation/controller/create_notice_cubit/create_notice_cubit.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/edit_notice/domain/entities/update_notice.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/edit_notice/presentation/controller/edit_notice_cubit/edit_notice_screen_cubit.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/controller/get_notices_cuibt/get_notices_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreateNoticeScreen extends StatefulWidget {
-  CreateNoticeScreen({super.key});
-
+class EditNoticeScreen extends StatefulWidget {
+  EditNoticeScreen({super.key, required this.notice});
+  final UpdateNotice notice;
   @override
-  State<CreateNoticeScreen> createState() => _CreateNoticeScreenState();
+  State<EditNoticeScreen> createState() => _EditNoticeScreenState();
 }
 
-class _CreateNoticeScreenState extends State<CreateNoticeScreen> {
+class _EditNoticeScreenState extends State<EditNoticeScreen> {
   // Create FocusNodes for each TextFormField
   final FocusNode _noticeTitle = FocusNode();
   final FocusNode _noticeBody = FocusNode();
   final TextEditingController _noticeTitleController = TextEditingController();
   final TextEditingController _noticeBodyController = TextEditingController();
+
+  @override
+  void initState() {
+    _noticeTitleController.text = widget.notice.title;
+    _noticeBodyController.text = widget.notice.description;
+    super.initState();
+  }
+
   @override
   void dispose() {
     // Dispose FocusNodes when the widget is disposed
@@ -39,14 +49,13 @@ class _CreateNoticeScreenState extends State<CreateNoticeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CreateNoticeCubit(),
+      create: (context) => EditNoticeScreenCubit(),
       child: Scaffold(
         appBar: CustomAppBar(
-          backButton:       TapEffect(
+          backButton: TapEffect(
               onClick: () {
                 Navigator.pop(context);
                 BlocProvider.of<GetNoticesCubit>(context).getNotices();
-
               },
               child: Icon(Icons.arrow_back_ios_new)),
           title: 'note'.tr(),
@@ -54,7 +63,7 @@ class _CreateNoticeScreenState extends State<CreateNoticeScreen> {
           backgroundColor: AppColors.backgroundColor,
           iconThemeColor: AppColors.warning2Color,
           actions: [
-            BlocConsumer<CreateNoticeCubit, CreateNoticeState>(
+            BlocConsumer<EditNoticeScreenCubit, EditNoticeScreenState>(
               listener: (context, state) {
                 // TODO: implement listener
               },
@@ -64,8 +73,9 @@ class _CreateNoticeScreenState extends State<CreateNoticeScreen> {
                   child: TapEffect(
                       onClick: () async {
                         print('object');
-                        context.read<CreateNoticeCubit>().createNotice(
-                              Notice(
+                        context.read<EditNoticeScreenCubit>().updateNotice(
+                              UpdateNotice(
+                                widget.notice.id,
                                 _noticeTitleController.text,
                                 _noticeBodyController.text,
                                 DateTime.now(),

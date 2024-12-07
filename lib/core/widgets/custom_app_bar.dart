@@ -1,6 +1,7 @@
 import 'package:factory_method_pattern_with_clean_architecture/core/responsive/dimension.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/utilts/colors.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/utilts/text_styles.dart';
+import 'package:factory_method_pattern_with_clean_architecture/core/widgets/tap_effect.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
@@ -8,17 +9,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
   final Color? iconThemeColor;
   final TextStyle? titleStyle;
   final Color backgroundColor;
-  final List<Widget> ?actions;
-  const CustomAppBar(
-      {super.key,
-      required this.title,
-      required this.backgroundColor,
-      this.titleStyle,
-      this.iconThemeColor, this.actions});
+  final List<Widget>? actions;
+  final Widget? backButton;
+
+  const CustomAppBar({
+    super.key,
+    required this.title,
+    required this.backgroundColor,
+    this.titleStyle,
+    this.iconThemeColor,
+    this.actions,
+    this.backButton,
+  });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: backButton,
       iconTheme: IconThemeData(color: iconThemeColor),
       elevation: 0.1,
       shadowColor: AppColors.accentColor,

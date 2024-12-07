@@ -35,12 +35,17 @@ class _MyHomePageState extends State<MyHomePage> {
             return const CupertinoActivityIndicator();
           }
           if (state is GetNoticesSuccess) {
-            return Column(
-
+            print(state.notices.length);
+            print((state.notices.length)*60);
+            return ListView(
               children: [
-                Flexible(child: DisplayNoticesByPeriod(notices: state.notices, title: 'Today')),
-                Expanded(child: DisplayNoticesByPeriod(notices: state.notices, title: 'Today')),
-                Expanded(child: DisplayNoticesByPeriod(notices: state.notices, title: 'Today')),
+
+                DisplayNoticesByPeriod(
+                    notices: state.notices.where((element) => element.createDate.day ==DateTime.now().day,).toList(), title: 'Today'),
+                DisplayNoticesByPeriod(
+                    notices: state.notices, title: 'yesterday'),
+                DisplayNoticesByPeriod(
+                    notices: state.notices, title: 'Today'),
               ],
             );
           }
@@ -50,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
           return const Center(
               child: CustomText(
                   text:
-                      'un expexted issue .\n please contact with 01000927095 whats app'));
+                      'unexpected issue .\n please contact with 01000927095 whats app'));
         },
       ),
       bottomSheet: Container(
@@ -90,5 +95,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-

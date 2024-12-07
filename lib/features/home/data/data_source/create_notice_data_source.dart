@@ -21,7 +21,7 @@ class HomeNoticeRemoteDataSource extends HomeNoticeDataSource {
       var response = await fireStore.collection('users').get();
       var docs = response.docs;
       var data = docs.map(
-        (e) => NoticeModel.fromJson(e.data()),
+        (e) => NoticeModel.fromFireBase(e),
       ).toList();
 
       return data;
