@@ -36,17 +36,20 @@ class _MyHomePageState extends State<MyHomePage> {
           }
           if (state is GetNoticesSuccess) {
             print(state.notices.length);
-            print((state.notices.length)*60);
-            return ListView(
-              children: [
-
-                DisplayNoticesByPeriod(
-                    notices: state.notices.where((element) => element.createDate.day ==DateTime.now().day,).toList(), title: 'Today'),
-                DisplayNoticesByPeriod(
-                    notices: state.notices, title: 'yesterday'),
-                DisplayNoticesByPeriod(
-                    notices: state.notices, title: 'Today'),
-              ],
+            print((state.notices.length) * 60);
+            return ListView.builder(
+              itemCount: state.uniqueDates.length,
+              itemBuilder: (context, index) {
+                var notices  = state.notices
+                    .where(
+                      (element) =>
+                  element.createDate.month == state.uniqueDates[index].month,
+                )
+                    .toList();
+                return DisplayNoticesByPeriod(
+                    notices: notices,
+                    title: state.uniqueDates[index].month.toString().tr());
+              },
             );
           }
           if (state is GetNoticesFailure) {

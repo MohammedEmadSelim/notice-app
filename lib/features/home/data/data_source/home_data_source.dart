@@ -15,7 +15,6 @@ abstract class HomeNoticeDataSource {
 class HomeNoticeRemoteDataSource extends HomeNoticeDataSource {
   @override
   Future<List<NoticeModel>>getNotice() async {
-    // Add a new document to the 'users' collection
     FirebaseFirestore fireStore = FirebaseFirestore.instance;
     try {
       var response = await fireStore.collection('users').get();

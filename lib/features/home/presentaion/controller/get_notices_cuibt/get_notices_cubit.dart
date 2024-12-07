@@ -9,7 +9,7 @@ part 'get_notices_state.dart';
 class GetNoticesCubit extends Cubit<GetNoticesState> {
   GetNoticesCubit() : super(GetNoticesInitial());
   final GetNoticeUseCase getNoticeUseCase = sl.get<GetNoticeUseCase>();
-
+  List<DateTime> uniqueDates = [];
   Future<void> getNotices() async {
     emit(GetNoticesLoading());
     var response = await getNoticeUseCase.call();
@@ -19,8 +19,25 @@ class GetNoticesCubit extends Cubit<GetNoticesState> {
         emit(GetNoticesFailure(failure.error));
       },
       (notices) {
-        emit(GetNoticesSuccess(notices));
+        final List<NoticeEntity> today = notices
+            .where(
+              (element) => element.createDate.month == DateTime.now().month,
+            )
+            .toList();
+
+        for (int i = 0; i < notices.length; i++) {
+          if (!uniqueDates.contains(DateTime(
+              notices[i].createDate.year, notices[i].createDate.month)))
+            {
+              uniqueDates.add(DateTime(
+                  notices[i].createDate.year, notices[i].createDate.month));
+            }
+
+        }
+        print(uniqueDates);
+        emit(GetNoticesSuccess(notices:notices,uniqueDates: uniqueDates));
       },
     );
   }
 }
+// List  d =[2024-12-06 04:48:34.977999, 2024-12-07 02:02:35.618, 2024-12-07 01:53:23.624, 2024-12-07 00:50:35.907, 2024-12-07 00:57:49.775, 2024-12-07 02:01:29.434, 2024-12-07 00:57:16.792]
