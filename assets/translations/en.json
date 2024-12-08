@@ -14,6 +14,12 @@
   "9": "September",
   "10": "October",
   "11": "November",
-  "12": "December"
+  "12": "December",
+  "please_insert_unique_id": "Please insert unique ID",
+  "confirm": "Confirm",
+  "this_id_is_exist": "This ID exists",
+  "enter_note_title": "Enter note title",
+  "enter_note_content": "Enter note...",
+  "secure_data_message": "This ID is to make your data secure and shared on your devices, preferred to be your email"
 
 }

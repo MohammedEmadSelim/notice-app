@@ -5,7 +5,6 @@ import 'package:factory_method_pattern_with_clean_architecture/core/utilts/color
 import 'package:factory_method_pattern_with_clean_architecture/core/widgets/custom_app_bar.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/widgets/custom_btn_widget.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/widgets/custom_text.dart';
-import 'package:factory_method_pattern_with_clean_architecture/features/home/domain/entities/notice_entity.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/components/display_notices_section.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/controller/get_notices_cuibt/get_notices_cubit.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,6 +21,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    // CacheHelper.clearData();
     return Scaffold(
       backgroundColor: AppColors.accent2Color,
       appBar: CustomAppBar(

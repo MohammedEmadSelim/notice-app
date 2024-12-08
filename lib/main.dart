@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/routes/route.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/service_locator/service_locators.dart' as di;
+import 'package:factory_method_pattern_with_clean_architecture/core/utilts/cache_helper.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/utilts/colors.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/utilts/observer.dart';
+import 'package:factory_method_pattern_with_clean_architecture/core/utilts/user_state.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/auth/presentation/screen_ui/auth_screen.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/controller/get_notices_cuibt/get_notices_cubit.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/screen_ui/home.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,6 +17,7 @@ void main() async {
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   await di.init();
+  await CacheHelper.init();
   Bloc.observer =CustomBlocObserver();
   runApp(
     EasyLocalization(
@@ -51,8 +55,8 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        home: const MyHomePage(),
-        initialRoute: '/',
+        home: UserState.isSignUp()? const MyHomePage():const AuthScreen(),
+        // initialRoute: '/',
         onGenerateRoute: appRoute.generateRoute,
       ),
     );

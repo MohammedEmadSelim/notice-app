@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/responsive/dimension.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/utilts/colors.dart';
@@ -41,6 +40,7 @@ class _CreateNoticeScreenState extends State<CreateNoticeScreen> {
     return BlocProvider(
       create: (context) => CreateNoticeCubit(),
       child: Scaffold(
+        backgroundColor: AppColors.backgroundColor,
         appBar: CustomAppBar(
           backButton:       TapEffect(
               onClick: () {
@@ -87,14 +87,15 @@ class _CreateNoticeScreenState extends State<CreateNoticeScreen> {
             child: Column(
               children: [
                 TextFormField(
+
                   controller: _noticeTitleController,
                   focusNode: _noticeTitle,
                   cursorColor: AppColors.warning2Color,
                   style: AppTextStyles.inputStyle1, // Use the style you defined
                   decoration: InputDecoration(
-                    hintText: "Enter notice title", // Placeholder text
+                    hintText: "enter_note_title".tr(), // Placeholder text
                     hintStyle: AppTextStyles.headLine3.copyWith(
-                        color: AppColors.accentColor,
+                        color: AppColors.greyColor,
                         fontWeight: FontWeight.w300),
                     border: InputBorder.none, // Removes the border
                   ),
@@ -104,13 +105,18 @@ class _CreateNoticeScreenState extends State<CreateNoticeScreen> {
                   },
                 ),
                 TextFormField(
+
                   controller: _noticeBodyController,
                   focusNode: _noticeBody,
                   cursorColor: AppColors.warning2Color,
                   maxLines: null, // Allow multiple lines
                   minLines: 1, // Start with a single line
                   keyboardType: TextInputType.multiline,
-                  decoration: const InputDecoration(border: InputBorder.none),
+                  decoration:  InputDecoration(border: InputBorder.none,
+                    hintText: "enter_note_content".tr(), // Placeholder text
+                    hintStyle: AppTextStyles.headLine3.copyWith(
+                        color: AppColors.greyColor,
+                        fontWeight: FontWeight.w300),),
                   onFieldSubmitted: (value) {
                     print(_noticeBodyController.text);
                     // You can handle submitting the form or closing the keyboard here

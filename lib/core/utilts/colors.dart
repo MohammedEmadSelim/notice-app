@@ -8,6 +8,7 @@ class AppColors {
   static const Color textColor = Color(0xFF212121);  // Dark Gray
   static const Color warningColor = Color(0xFFFFEB3B); // Yellow
   static const Color warning2Color = Color(0xFFE7B940); // Yellow
+  static const Color greyColor = Color(0xFFbfc0c0); // Yellow
 
   static const Color errorColor = Color(0xFFF44336); // Red
 }

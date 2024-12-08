@@ -1,3 +1,7 @@
+import 'package:factory_method_pattern_with_clean_architecture/features/auth/data/data_source/auth_data_source.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/auth/data/repository/auth_repository.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/auth/domian/use_cases/check_usero_id_exsist.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/auth/domian/use_cases/create_user_id_use_case.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/data/data_source/create_notice_data_source.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/data/repository/create_notice_repository.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/use_cases/create_notice_use_case.dart';
@@ -27,6 +31,16 @@ Future<void> init()async{
   sl.registerLazySingleton<EditNoticeRemoteDataSource>(() => EditNoticeRemoteDataSource());
   sl.registerLazySingleton<EditNoticeRepository>(() => EditNoticeRepository(sl.get<EditNoticeRemoteDataSource>()));
   sl.registerLazySingleton<EditNoticeUseCase>(() => EditNoticeUseCase(sl.get<EditNoticeRepository>()));
+
+
+  sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource());
+  sl.registerLazySingleton<AuthRepository>(() => AuthRepository(sl.get<AuthRemoteDataSource>()));
+  sl.registerLazySingleton<CreateUserIdUseCase>(() => CreateUserIdUseCase(sl.get<AuthRepository>()));
+
+
+
+  sl.registerLazySingleton<CheckUserIdExist>(() => CheckUserIdExist(sl.get<AuthRepository>()));
+
 
 
 }
