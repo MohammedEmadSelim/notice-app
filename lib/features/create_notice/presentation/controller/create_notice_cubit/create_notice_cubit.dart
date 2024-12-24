@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/service_locator/service_locators.dart';
-import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/notice.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/notice_request.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/use_cases/create_notice_use_case.dart';
-import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/controller/get_notices_cuibt/get_notices_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -23,4 +22,7 @@ class CreateNoticeCubit extends Cubit<CreateNoticeState> {
       emit(CreateNoticeSuccess());
     },);
   }
+
+
+
 }

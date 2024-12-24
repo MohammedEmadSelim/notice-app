@@ -38,7 +38,6 @@ class AuthRemoteDataSource extends BaseAuthDataSource {
         print('FirebaseException');
         throw CustomFireBaseException('this_id_is_exist'.tr());
       }
-      print('   return UserIdModel();');
       return UserIdModel();
     } catch (e) {
       rethrow;

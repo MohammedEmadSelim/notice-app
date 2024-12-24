@@ -9,6 +9,7 @@ import 'package:factory_method_pattern_with_clean_architecture/features/edit_not
 import 'package:factory_method_pattern_with_clean_architecture/features/edit_notice/data/repository/edit_notice_repository.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/edit_notice/domain/use_cases/edit_notice_use_case.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/data/data_source/home_data_source.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/home/data/data_source/local_data_source.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/data/repository/home_repository.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/domain/use_cases/get_notice_use_case.dart';
 import 'package:get_it/get_it.dart';
@@ -24,7 +25,8 @@ Future<void> init()async{
 
 
   sl.registerLazySingleton<HomeNoticeRemoteDataSource>(() => HomeNoticeRemoteDataSource());
-  sl.registerLazySingleton<HomeNoticeRepository>(() => HomeNoticeRepository(sl.get<HomeNoticeRemoteDataSource>()));
+  sl.registerLazySingleton<HomeLocalNoticeDataSourceImpl>(() => HomeLocalNoticeDataSourceImpl());
+  sl.registerLazySingleton<HomeNoticeRepository>(() => HomeNoticeRepository(sl.get<HomeNoticeRemoteDataSource>(),sl.get<HomeLocalNoticeDataSourceImpl>()));
   sl.registerLazySingleton<GetNoticeUseCase>(() => GetNoticeUseCase(sl.get<HomeNoticeRepository>()));
 
 

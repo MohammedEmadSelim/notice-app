@@ -4,7 +4,7 @@ import 'package:factory_method_pattern_with_clean_architecture/core/utilts/const
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/data/mappers/create_notice_mapper.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/data/models/create_notice_model.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/create_notice_entity.dart';
-import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/notice.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/notice_request.dart';
 
 abstract class CreateNoticeDataSource {
   Future< CreateNoticeEntity> createNotice(Notice notice);

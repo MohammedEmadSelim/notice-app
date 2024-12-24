@@ -6,7 +6,7 @@ import 'package:factory_method_pattern_with_clean_architecture/core/utilts/color
 import 'package:factory_method_pattern_with_clean_architecture/core/utilts/text_styles.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/widgets/custom_app_bar.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/widgets/tap_effect.dart';
-import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/notice.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/notice_request.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/presentation/controller/create_notice_cubit/create_notice_cubit.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/home/presentaion/controller/get_notices_cuibt/get_notices_cubit.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +87,6 @@ class _CreateNoticeScreenState extends State<CreateNoticeScreen> {
             child: Column(
               children: [
                 TextFormField(
-
                   controller: _noticeTitleController,
                   focusNode: _noticeTitle,
                   cursorColor: AppColors.warning2Color,
@@ -105,7 +104,6 @@ class _CreateNoticeScreenState extends State<CreateNoticeScreen> {
                   },
                 ),
                 TextFormField(
-
                   controller: _noticeBodyController,
                   focusNode: _noticeBody,
                   cursorColor: AppColors.warning2Color,

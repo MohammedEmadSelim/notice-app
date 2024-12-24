@@ -2,7 +2,7 @@ import 'package:either_dart/src/either.dart';
 import 'package:factory_method_pattern_with_clean_architecture/core/utilts/failure/failure.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/data/data_source/create_notice_data_source.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/create_notice_entity.dart';
-import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/notice.dart';
+import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/entities/notice_request.dart';
 import 'package:factory_method_pattern_with_clean_architecture/features/create_notice/domain/repository/base_create_notice_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 
